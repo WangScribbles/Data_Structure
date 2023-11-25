@@ -120,13 +120,13 @@ bool BSTree<K>::Erase(const K& key)
 			//3、左右都不为空
 			if (cur->_left == nullptr)
 			{
-				if (cur == _root)
+				if (cur == _root) //错误2的解决方法
 				{
 					_root = cur->_right;
 				}
 				else
 				{
-					if (parent->_left == cur)
+					if (parent->_left == cur)  //2、若删除根结点，则parent为null。
 						parent->_left = cur->_right;
 					else
 						parent->_right = cur->_right;
@@ -136,13 +136,13 @@ bool BSTree<K>::Erase(const K& key)
 			}
 			else if (cur->_right == nullptr)
 			{
-				if (cur == _root)
+				if (cur == _root) //错误2的解决方法
 				{
 					_root = cur->_left;
 				}
 				else
 				{
-					if (parent->_left == cur)
+					if (parent->_left == cur)  //2、若删除根结点，则parent为null。
 						parent->_left = cur->_left;
 					else
 						parent->_right = cur->_left;
@@ -152,7 +152,7 @@ bool BSTree<K>::Erase(const K& key)
 			}
 			else //找右树最小节点
 			{
-				Node* rightMinParent = cur;
+				Node* rightMinParent = cur; //1、如果赋null，那么若while循环不进去，则167行出错
 				Node* rightMin = cur->_right;
 				while (rightMin->_left)
 				{
