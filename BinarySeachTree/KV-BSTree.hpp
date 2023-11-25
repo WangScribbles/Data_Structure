@@ -169,6 +169,7 @@ bool BSTree<K, V>::Erase(const K& key)
 
 				//替代删除法
 				cur->_key = rightMin->_key;
+				cur->_value = rightMin->_value;
 
 				//转换成删除rightMin(rightMin是左为空，让父亲指向他的右)
 				if (rightMin == rightMinParent->_left)
