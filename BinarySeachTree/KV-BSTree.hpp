@@ -1,4 +1,4 @@
-//key-valueĞÍ¶ş²æËÑË÷Ê÷
+//key-valueå‹äºŒå‰æœç´¢æ ‘
 
 #pragma once
 #include <iostream>
@@ -26,175 +26,191 @@ class BSTree
 {
 	typedef BSTreeNode<K, V> Node;
 public:
-	//²åÈë
-	bool Insert(const K& key, const V& value)
-	{
-		if (_root == nullptr)
-		{
-			_root = new Node(key, value);
-			return true;
-		}
+	//æ’å…¥
+	bool Insert(const K& key, const V& value);
+	//æŸ¥æ‰¾
+	Node* Find(const K& key);
+	//åˆ é™¤
+	bool Erase(const K& key);
+	//éå†
+	void _InOrder(Node* root);
+	void InOrder();
 
-		Node* parent = nullptr;
-		Node* cur = _root;
-		while (cur)
-		{
-			if (cur->_key < key)
-			{
-				parent = cur;
-				cur = cur->_right;
-			}
-			else if (cur->_key > key)
-			{
-				parent = cur;
-				cur = cur->_left;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		cur = new Node(key, value);
-		if (parent->_key < cur->_key)
-		{
-			parent->_right = cur;
-		}
-		else
-		{
-			parent->_left = cur;
-		}
-
-		return true;
-	}
-
-	//²éÕÒ
-	Node* Find(const K& key)
-	{
-		Node* cur = _root;
-		while (cur)
-		{
-			if (cur->_key < key)
-				cur = cur->_right;
-			else if (cur->_key > key)
-				cur = cur->_left;
-			else
-				return cur;
-		}
-
-		return nullptr;
-	}
-
-	//É¾³ı
-	bool Erase(const K& key)
-	{
-		Node* parent = nullptr;
-		Node* cur = _root;
-		while (cur)
-		{
-			if (cur->_key < key)
-			{
-				parent = cur;
-				cur = cur->_right;
-			}
-			else if (cur->_key > key)
-			{
-				parent = cur;
-				cur = cur->_left;
-			}
-			else
-			{
-				//ÕÒµ½ÁË£¬¿ªÊ¼É¾³ı
-				//1¡¢×óÎª¿Õ
-				//2¡¢ÓÒÎª¿Õ
-				//3¡¢×óÓÒ¶¼²»Îª¿Õ
-				if (cur->_left == nullptr)
-				{
-					if (cur == _root)
-					{
-						_root = cur->_right;
-					}
-					else
-					{
-						if (parent->_left == cur)
-							parent->_left = cur->_right;
-						else
-							parent->_right = cur->_right;
-					}
-
-					delete cur;
-				}
-				else if (cur->_right == nullptr)
-				{
-					if (cur == _root)
-					{
-						_root = cur->_left;
-					}
-					else
-					{
-						if (parent->_left == cur)
-							parent->_left = cur->_left;
-						else
-							parent->_right = cur->_left;
-					}
-
-					delete cur;
-				}
-				else //ÕÒÓÒÊ÷×îĞ¡½Úµã
-				{
-					Node* rightMinParent = cur;
-					Node* rightMin = cur->_right;
-					while (rightMin->_left)
-					{
-						rightMinParent = rightMin;
-						rightMin = rightMin->_left;
-					}
-
-					//Ìæ´úÉ¾³ı·¨
-					cur->_key = rightMin->_key;
-
-					//×ª»»³ÉÉ¾³ırightMin(rightMinÊÇ×óÎª¿Õ£¬ÈÃ¸¸Ç×Ö¸ÏòËûµÄÓÒ)
-					if (rightMin == rightMinParent->_left)
-						rightMinParent->_left = rightMin->_right;
-					else
-						rightMinParent->_right = rightMin->_right;
-
-					delete rightMin;
-				}
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	//±éÀú
-	void _InOrder(Node* root)
-	{
-		if (root == nullptr)
-			return;
-
-		_InOrder(root->_left);
-		cout << root->_key << ":" << root->_value << endl;
-		_InOrder(root->_right);
-	}
-	void InOrder()
-	{
-		_InOrder(_root);
-		cout << endl;
-	}
 private:
 	Node* _root = nullptr;
 };
 
-//²âÊÔ
+//æ’å…¥
+template<class K, class V>
+bool BSTree<K, V>::Insert(const K& key, const V& value)
+{
+	if (_root == nullptr)
+	{
+		_root = new Node(key, value);
+		return true;
+	}
+
+	Node* parent = nullptr;
+	Node* cur = _root;
+	while (cur)
+	{
+		if (cur->_key < key)
+		{
+			parent = cur;
+			cur = cur->_right;
+		}
+		else if (cur->_key > key)
+		{
+			parent = cur;
+			cur = cur->_left;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	cur = new Node(key, value);
+	if (parent->_key < cur->_key)
+	{
+		parent->_right = cur;
+	}
+	else
+	{
+		parent->_left = cur;
+	}
+
+	return true;
+}
+
+//æŸ¥æ‰¾
+template<class K, class V>
+typename BSTree<K, V>::Node* BSTree<K, V>::Find(const K& key)
+{
+	Node* cur = _root;
+	while (cur)
+	{
+		if (cur->_key < key)
+			cur = cur->_right;
+		else if (cur->_key > key)
+			cur = cur->_left;
+		else
+			return cur;
+	}
+
+	return nullptr;
+}
+
+//åˆ é™¤
+template<class K, class V>
+bool BSTree<K, V>::Erase(const K& key)
+{
+	Node* parent = nullptr;
+	Node* cur = _root;
+	while (cur)
+	{
+		if (cur->_key < key)
+		{
+			parent = cur;
+			cur = cur->_right;
+		}
+		else if (cur->_key > key)
+		{
+			parent = cur;
+			cur = cur->_left;
+		}
+		else
+		{
+			//æ‰¾åˆ°äº†ï¼Œå¼€å§‹åˆ é™¤
+			//1ã€å·¦ä¸ºç©º
+			//2ã€å³ä¸ºç©º
+			//3ã€å·¦å³éƒ½ä¸ä¸ºç©º
+			if (cur->_left == nullptr)
+			{
+				if (cur == _root)
+				{
+					_root = cur->_right;
+				}
+				else
+				{
+					if (parent->_left == cur)
+						parent->_left = cur->_right;
+					else
+						parent->_right = cur->_right;
+				}
+
+				delete cur;
+			}
+			else if (cur->_right == nullptr)
+			{
+				if (cur == _root)
+				{
+					_root = cur->_left;
+				}
+				else
+				{
+					if (parent->_left == cur)
+						parent->_left = cur->_left;
+					else
+						parent->_right = cur->_left;
+				}
+
+				delete cur;
+			}
+			else //æ‰¾å³æ ‘æœ€å°èŠ‚ç‚¹
+			{
+				Node* rightMinParent = cur;
+				Node* rightMin = cur->_right;
+				while (rightMin->_left)
+				{
+					rightMinParent = rightMin;
+					rightMin = rightMin->_left;
+				}
+
+				//æ›¿ä»£åˆ é™¤æ³•
+				cur->_key = rightMin->_key;
+
+				//è½¬æ¢æˆåˆ é™¤rightMin(rightMinæ˜¯å·¦ä¸ºç©ºï¼Œè®©çˆ¶äº²æŒ‡å‘ä»–çš„å³)
+				if (rightMin == rightMinParent->_left)
+					rightMinParent->_left = rightMin->_right;
+				else
+					rightMinParent->_right = rightMin->_right;
+
+				delete rightMin;
+			}
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+//éå†
+template<class K, class V>
+void BSTree<K, V>::_InOrder(Node* root)
+{
+	if (root == nullptr)
+		return;
+
+	_InOrder(root->_left);
+	cout << root->_key << ":" << root->_value << endl;
+	_InOrder(root->_right);
+}
+template<class K, class V>
+void BSTree<K, V>::InOrder()
+{
+	_InOrder(_root);
+	cout << endl;
+}
+
+//æµ‹è¯•
 void TestKVBSTree01()
 {
 	BSTree<string, string> dict;
-	dict.Insert("apple", "Æ»¹û");
-	dict.Insert("banana", "Ïã½¶");
-	dict.Insert("watermelon", "Î÷¹Ï");
+	dict.Insert("apple", "è‹¹æœ");
+	dict.Insert("banana", "é¦™è•‰");
+	dict.Insert("watermelon", "è¥¿ç“œ");
 
 	string str;
 	while (cin >> str)
@@ -206,14 +222,14 @@ void TestKVBSTree01()
 		}
 		else
 		{
-			cout << "ÎŞ´Ëµ¥´Ê" << endl;
+			cout << "æ— æ­¤å•è¯" << endl;
 		}
 	}
 }
 
 void TestKVBSTree02()
 {
-	string strArr[] = { "Î÷¹Ï", "Î÷¹Ï", "Î÷¹Ï", "Æ»¹û", "Æ»¹û", "Ïã½¶" };
+	string strArr[] = { "è¥¿ç“œ", "è¥¿ç“œ", "è¥¿ç“œ", "è‹¹æœ", "è‹¹æœ", "é¦™è•‰" };
 	BSTree<string, int> countTree;
 
 	for (auto str : strArr)
