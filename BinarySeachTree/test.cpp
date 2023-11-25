@@ -3,10 +3,10 @@
 
 int main()
 {
-	//K-BSTree²âÊÔ
+	//K-BSTreeæµ‹è¯•
 	TestKBSTree();
 
-	//KV-BSTree²âÊÔ
+	//KV-BSTreeæµ‹è¯•
 	//TestKVBSTree01();
 	//TestKVBSTree02();
 
