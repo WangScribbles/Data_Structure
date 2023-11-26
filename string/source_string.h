@@ -85,7 +85,7 @@ namespace ws
 		//size()
 		size_t size()
 		{
-			return strle(_str);
+			return strlen(_str);
 		}
 		
 		//c_str()
