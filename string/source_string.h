@@ -7,7 +7,7 @@ namespace ws
 	public:
 	
 	
-	
+		{
 			//默认构造
 				/*
 				 *std::string遍历时什么都不输出
@@ -40,7 +40,7 @@ namespace ws
 				strcpy(_str, str); //strcpy会把'\0'拷过去
 			}
 	
-	
+		}
 	
 		
 		//默认和有参合起来
