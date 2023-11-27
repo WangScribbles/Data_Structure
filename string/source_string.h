@@ -1,5 +1,5 @@
 #include <cstring>
-
+ 
 namespace ws
 {
 	class string
