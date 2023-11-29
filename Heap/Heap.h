@@ -18,11 +18,11 @@ void HeapInit(Heap* php, HPDataType* a, int n);
 void HeapDestory(Heap* php);
 
 void HeapPush(Heap* php, HPDataType x);
-void HeapPop(Heap* php);  //Pop¶Ñ¶¥Êı¾İ
+void HeapPop(Heap* php);  //åˆ é™¤å †é¡¶æ•°æ®
 
 HPDataType HeapTop(Heap* php);
 
-//¶ÑÅÅĞò
+/å †æ’åº
 void HeapSort(int* a, int n);
 
 void AdjustDown(HPDataType* a, int n, int root);
