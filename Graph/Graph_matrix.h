@@ -181,7 +181,7 @@ void TestGraph()
 	g.AddEage('2', '0', 3);
 	g.AddEage('3', '2', 6);
 	
-	g.print();
+	g.Print();
 }
 
  void TestBDFS()
@@ -192,7 +192,7 @@ void TestGraph()
 	g.AddEage("张三", "王五", 200);
 	g.AddEage("王五", "赵六", 30);
 	g.AddEage("王五", "周七", 30);
-	g.print();
+	g.Print();
 	
 	g.BFS("张三");
 	//g.DFS("张三");
