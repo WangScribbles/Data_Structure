@@ -111,7 +111,7 @@ void TestGraph()
 	g.AddEage("张三", "王五", 200);
 	g.AddEage("王五", "赵六", 30);
 	
-	g.print();
+	g.Print();
 }
 
 }  // end of namespace link_table
