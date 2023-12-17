@@ -110,7 +110,7 @@ public:
 		while (!q.empty())
 		{
 			// 一层一层出
-			for (inti  = 0; i < levelSize; ++i)
+			for (int i  = 0; i < levelSize; ++i)
 			{
 				int front = q.front();
 				q.pop();
