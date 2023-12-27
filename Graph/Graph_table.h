@@ -101,7 +101,7 @@ public:
     {
         size_t index = GetVertexIndex(v);
         vector<bool> visited(_vertexs.size(), false); // 记录顶点是否被访问过的数组
-        DFSHelper(index, visited);
+        _DFS(index, visited);
     }
 
     void _DFS(size_t index, vector<bool>& visited)
