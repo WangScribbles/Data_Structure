@@ -23,6 +23,7 @@ struct HashData
 template<class K>
 class HashTable
 {
+	typedef HashData<K> HashData;
 public:
 	bool Insert(const K& key)
 	{
@@ -148,7 +149,7 @@ public:
 	}
 
 private:
-	vector<HashData<K>> _tables;
+	vector<HashData> _tables;
 	size_t _num = 0; // 存了几个有效数据
 }
 
