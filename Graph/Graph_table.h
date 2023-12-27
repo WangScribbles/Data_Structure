@@ -27,6 +27,7 @@ class Graph
 	typedef Edge<W> Edge;
 public:
 	// 图的创建
+
 	Graph(const V* a, size_t n) // 传的是V类型的数组
 	{
 		_vertexs.resever(n);
@@ -132,7 +133,7 @@ public:
         q.push(startIndex);
 
         while (!q.empty()) 
-								{
+		{
             size_t curIndex = q.front();
             q.pop();
 
@@ -140,9 +141,9 @@ public:
 
             Edge* cur = _tables[curIndex];
             while (cur) 
-												{
+			{
                 if (!visited[cur->_dsti]) 
-																{
+				{
                     visited[cur->_dsti] = true;
                     q.push(cur->_dsti);
                 }
