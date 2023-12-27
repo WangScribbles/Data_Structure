@@ -50,7 +50,7 @@ public:
 					{
 						// 计算在新表中的位置并处理冲突
 						size_t index = _tables[i]._data % newtables.size();
-						while (newtables[index]._state == EXITS)
+						while (newtables[index]._state == EXIST)
 						{
 							++index;
 							if (index == _tables.size())
@@ -151,7 +151,7 @@ public:
 private:
 	vector<HashData> _tables;
 	size_t _num = 0; // 存了几个有效数据
-}
+}；
 
 void TestHashTable()
 {
