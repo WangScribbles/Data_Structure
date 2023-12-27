@@ -3,7 +3,7 @@
 // 开放定址法（闭散列）：
 // 1.线性探测 2.二次探测
 
-#pragme once
+#pragma once
 #include <vector>
 
 enum State
