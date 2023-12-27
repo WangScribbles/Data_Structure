@@ -25,6 +25,62 @@ class HashTable
 {
 	typedef HashData<K> HashData;
 public:
+	bool isPrime(size_t n)
+	{
+		if (n == 1)
+			return false;
+
+		for (size_t i = 2; i <= sqrt(n); i++)
+		{
+			if (n % i == 0)
+				return false;
+		}
+
+		return true;
+	}
+
+	size_t getPrime(size_t n)
+	{
+		for (size_t i = n - 1; i >= 2; i--)
+		{
+			if (isPrime(i))
+			{
+				return i;
+			}
+		}
+
+		return -1; // 处理
+	}
+
+	// 求平均查找长度
+	double getAverageSearchLength()
+	{
+		double sum = 0;
+		size_t size = _tables.size();
+		size_t count = _num;
+	
+		for (size_t i = 0; i < size; ++i)
+		{
+			if (_tables[i]._state == EXIST)
+			{
+				size_t index = _tables[i]._data % getPrime(size);
+				size_t step = 1;
+	
+				while (_tables[index]._data != _tables[i]._data)
+				{
+					++index;
+					if (index == size)
+						index = 0;
+	
+					++step;
+				}
+	
+				sum += 1.0 / step;
+			}
+		}
+	
+		return sum / count;
+	}
 	bool Insert(const K& key)
 	{
 		// 负载因子 = 表中数据个数 / 表的大小  （衡量哈希表满的程度）
