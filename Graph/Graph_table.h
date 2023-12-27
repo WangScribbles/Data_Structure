@@ -27,7 +27,6 @@ class Graph
 	typedef Edge<W> Edge;
 public:
 	// 图的创建
-
 	Graph(const V* a, size_t n) // 传的是V类型的数组
 	{
 		_vertexs.resever(n);
@@ -123,7 +122,8 @@ public:
     }
 	
 	// 广度度优先遍历
-	void BFS(const V& start) {
+	void BFS(const V& start) 
+	{
         size_t startIndex = GetVertexIndex(start);
         vector<bool> visited(_vertexs.size(), false); // 记录顶点是否被访问过
         queue<size_t> q; // 用于存储待访问的顶点
@@ -131,15 +131,18 @@ public:
         visited[startIndex] = true;
         q.push(startIndex);
 
-        while (!q.empty()) {
+        while (!q.empty()) 
+								{
             size_t curIndex = q.front();
             q.pop();
 
             cout << _vertexs[curIndex] << " ";
 
             Edge* cur = _tables[curIndex];
-            while (cur) {
-                if (!visited[cur->_dsti]) {
+            while (cur) 
+												{
+                if (!visited[cur->_dsti]) 
+																{
                     visited[cur->_dsti] = true;
                     q.push(cur->_dsti);
                 }
