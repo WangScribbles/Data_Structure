@@ -97,6 +97,57 @@ public:
 		}
 	}
 	
+	// 深度优先遍历
+    void DFS(const V& v)
+    {
+        size_t index = GetVertexIndex(v);
+        vector<bool> visited(_vertexs.size(), false); // 记录顶点是否被访问过的数组
+        DFSHelper(index, visited);
+    }
+
+    void _DFS(size_t index, vector<bool>& visited)
+    {
+        visited[index] = true; // 标记当前顶点为已访问
+
+        cout << _vertexs[index] << " "; // 输出当前顶点
+
+        Edge* cur = _tables[index];
+        while (cur)
+        {
+            if (!visited[cur->_dsti]) // 如果当前顶点的邻接顶点未被访问过
+            {
+                _DFS(cur->_dsti, visited); // 递归访问邻接顶点
+            }
+            cur = cur->_next;
+        }
+    }
+	
+	// 广度度优先遍历
+	void BFS(const V& start) {
+        size_t startIndex = GetVertexIndex(start);
+        vector<bool> visited(_vertexs.size(), false); // 记录顶点是否被访问过
+        queue<size_t> q; // 用于存储待访问的顶点
+
+        visited[startIndex] = true;
+        q.push(startIndex);
+
+        while (!q.empty()) {
+            size_t curIndex = q.front();
+            q.pop();
+
+            cout << _vertexs[curIndex] << " ";
+
+            Edge* cur = _tables[curIndex];
+            while (cur) {
+                if (!visited[cur->_dsti]) {
+                    visited[cur->_dsti] = true;
+                    q.push(cur->_dsti);
+                }
+                cur = cur->_next;
+            }
+        }
+    }
+	
 private:
 	vector<V>   _vertexs;   // 顶点集合
 	map<V, int> _indexMap;  // 顶点映射下标 
