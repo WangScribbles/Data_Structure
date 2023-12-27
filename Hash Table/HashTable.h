@@ -148,7 +148,7 @@ public:
 	}
 
 private:
-	vector<K> _tables;
+	vector<HashData<K>> _tables;
 	size_t _num = 0; // 存了几个有效数据
 }
 
