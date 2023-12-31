@@ -6,14 +6,14 @@
 #include <assert.h>
 #include <string.h>
 
-int BF(char* str, char* sub)
+int BF(char* str, char* sub, int pos)
 {
 	assert(str && sub);
 	
 	int lenStr = strlen(str);
 	int lenSub = strlen(sub);
 	
-	int i = 0;
+	int i = pos;
 	int j = 0;
 	
 	while (i < lenStr && j < lenSub)
@@ -38,9 +38,9 @@ int BF(char* str, char* sub)
 
 int main()
 {
-	int ret1 = BF("abcdef", "bcd");   //1
-	int ret2 = BF("abcdef", "fgh");   //-1
-	int ret3 = BF("abcdef", "abcd");  //0
+	int ret1 = BF("abcdef", "bcd", 0);   //1
+	int ret2 = BF("abcdef", "fgh", 0);   //-1
+	int ret3 = BF("abcdef", "abcd", 0);  //0
 	
 	printf("%d %d %d", ret1, ret2, ret3);
 	
